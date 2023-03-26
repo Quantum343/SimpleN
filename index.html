@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Notepad v1.1</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="textbox-container">
+        <textarea id="code" rows="20" cols="80" placeholder="Enter Text/HTML here..."></textarea>
+        <button id="save-btn">Save as</button>
+      </div>
+      <div class="sidebar-container">
+        <div class="sidebar-content">
+          <button id="run-btn">Run as HTML</button>
+          <button id="clear-btn">Clear Text</button>
+          <div id="output-container"></div>
+        </div>
+      </div>
+    </div>
+    <script src="app.js"></script>
+    <script>
+      const saveBtn = document.getElementById('save-btn');
+      saveBtn.addEventListener('click', () => {
+        const code = document.getElementById('code').value;
+        const name = prompt('Enter a name for your code:');
+        const format = prompt('Enter a format for your code (e.g. html, js, css):');
+        const data = new Blob([code], {type: 'text/plain'});
+        const url = URL.createObjectURL(data);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `${name}.${format}`;
+        link.click();
+      });
+    </script>
+  </body>
+</html>
