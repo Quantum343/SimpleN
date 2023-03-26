@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Notepad v1.1</title>
+    <title>Notepad v1.2</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style2.css">
   </head>
@@ -15,6 +15,8 @@
         <div class="sidebar-content">
           <button id="run-btn">Run as HTML</button>
           <button id="clear-btn">Clear Text</button>
+          <button id="save-to-file-btn">Save to Browser</button>
+          <button id="load-btn">Load from</button>
           <div id="output-container"></div>
         </div>
       </div>
@@ -24,14 +26,42 @@
       const saveBtn = document.getElementById('save-btn');
       saveBtn.addEventListener('click', () => {
         const code = document.getElementById('code').value;
-        const name = prompt('Enter a name for your code:');
-        const format = prompt('Enter a format for your code (e.g. html, js, css):');
+        const name = prompt('Enter a name for your text:');
+        const format = prompt('Enter a format for your text (e.g. html, js, css, txt):');
         const data = new Blob([code], {type: 'text/plain'});
         const url = URL.createObjectURL(data);
         const link = document.createElement('a');
         link.href = url;
         link.download = `${name}.${format}`;
         link.click();
+      });
+      
+      const saveToFileBtn = document.getElementById('save-to-file-btn');
+      saveToFileBtn.addEventListener('click', () => {
+        const code = document.getElementById('code').value;
+        const name = prompt('Enter a name for your text:');
+        localStorage.setItem(name, code);
+        alert(`Text saved with name "${name}"`);
+      });
+      
+      const loadBtn = document.getElementById('load-btn');
+      loadBtn.addEventListener('click', () => {
+        const option = prompt('Where do you want to load from? (Computer/Browser)');
+        if (option === 'Computer') {
+          // implement code to load from computer file
+          alert('Loading from computer is not yet implemented');
+        } else if (option === 'Browser') {
+          const name = prompt('Enter the name of the saved text:');
+          const code = localStorage.getItem(name);
+          if (code === null) {
+            alert(`No text found with name "${name}"`);
+          } else {
+            document.getElementById('code').value = code;
+            alert(`Text loaded from browser with name "${name}"`);
+          }
+        } else {
+          alert('Invalid option selected');
+        }
       });
     </script>
   </body>
