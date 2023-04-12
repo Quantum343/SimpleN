@@ -46,11 +46,12 @@
       
       const loadBtn = document.getElementById('load-btn');
       loadBtn.addEventListener('click', () => {
-        const option = prompt('Where do you want to load from? (Computer/Browser)');
-        if (option === 'Computer') {
+        const option = prompt('Where do you want to load from? (C/B)');
+        if (option === 'C') {
           // implement code to load from computer file
           alert('Loading from computer is not yet implemented');
-        } else if (option === 'Browser') {
+          alert('Option is unlikely to be implemented in near future');
+        } else if (option === 'B') {
           const name = prompt('Enter the name of the saved text:');
           const code = localStorage.getItem(name);
           if (code === null) {
